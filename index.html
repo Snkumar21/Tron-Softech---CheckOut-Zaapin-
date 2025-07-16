@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Zaapin - Checkout</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- 🔶 Top Navbar -->
+    <header class="navbar">
+        <div class="brand">Zaapin</div>
+        <div class="profile">
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </header>
+    
+    <div class="main-layout">
+        <!-- 📁 Sidebar -->
+        <nav class="sidebar">
+            <ul>
+                <li><i class="fas fa-home"></i> Home</li>
+                <li><i class="fas fa-shopping-cart"></i> Cart</li>
+                <li class="active"><i class="fas fa-credit-card"></i> Checkout</li>
+            </ul>
+        </nav>
+    
+        <!-- 🧾 Main Checkout Content -->
+        <main class="container">
+            <h1>Checkout</h1>
+
+            <div class="order-summary">
+                <h2>Your Order</h2>
+                <ul>
+                    <li><span>🍕 Margherita Pizza</span><span>₹ 250</span></li>
+                    <li><span>🥤 Coke 500ml</span><span>₹ 50</span></li>
+                    <li><span>🍟 French Fries</span><span>₹ 100</span></li>
+                </ul>
+                <div class="total">
+                    <strong>Total:</strong> <span>₹ 400</span>
+                </div>
+            </div>
+
+            <div class="payment-section">
+                <h2>Select Payment Method</h2>
+                <label><input type="radio" name="payment" value="cod" /> Cash on Delivery</label>
+                <label><input type="radio" name="payment" value="online" /> Online Payment</label>
+            </div>
+
+            <div id="cod-section" class="cod-section hidden">
+                <h3>📦 Confirm COD Address</h3>
+                <textarea placeholder="Enter delivery address..."></textarea>
+                <button class="confirm-btn">Confirm COD Order</button>
+            </div>
+
+            <div id="online-section" class="online-section hidden">
+                <h3>💳 Online Payment Coming Soon...</h3>
+                <button class="disabled" disabled>Pay Online</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
