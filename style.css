@@ -137,10 +137,6 @@ body {
   flex-grow: 1;
 }
 
-.hidden {
-  display: none;
-}
-
 .page-section {
   display: block;
   padding: 20px;
@@ -177,6 +173,7 @@ body {
 .cod-section, .online-section {
   margin-top: 20px;
 }
+
 .cod-section textarea {
   width: 100%;
   padding: 10px;
@@ -186,6 +183,7 @@ body {
   min-height: 80px;
   margin-bottom: 10px;
 }
+
 .confirm-btn {
   background-color: #28a745;
   color: white;
@@ -195,9 +193,11 @@ body {
   border-radius: 6px;
   cursor: pointer;
 }
+
 .confirm-btn:hover {
   background-color: #218838;
 }
+
 .disabled {
   background-color: #ccc;
   color: #666;
@@ -205,9 +205,42 @@ body {
   border: none;
   border-radius: 6px;
 }
-.hidden {
-  display: none;
+
+#orderSuccess {
+  text-align: center;
+  padding: 40px;
 }
+
+.order-details {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.order-details p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+button.confirm-btn,
+#orderSuccess button {
+  background-color: #ff6600;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button.confirm-btn:hover,
+#orderSuccess button:hover {
+  background-color: #e65c00;
+}
+
 
 /* Responsive Option */
 @media (max-width: 768px) {

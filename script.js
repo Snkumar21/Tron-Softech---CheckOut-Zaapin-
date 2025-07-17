@@ -1,5 +1,4 @@
 // User Dropdown Functionality--
-
 const userDropdown = document.getElementById('userDropdown');
     const dropdownMenu = document.getElementById('dropdownMenu');
 
@@ -36,17 +35,66 @@ navLinks.forEach(link => {
 });
 
 // Handle COD/Online toggle in checkout
+const codRadio = document.querySelector('input[value="cod"]');
+const onlineRadio = document.querySelector('input[value="online"]');
 const codSection = document.getElementById('cod-section');
 const onlineSection = document.getElementById('online-section');
 
-document.querySelectorAll('input[name="payment"]').forEach((input) => {
-    input.addEventListener('change', function () {
-        if (this.value === 'cod') {
-            codSection.classList.remove('hidden');
-            onlineSection.classList.add('hidden');
-        } else {
-            codSection.classList.add('hidden');
-            onlineSection.classList.remove('hidden');
-        }
-    });
+codRadio.addEventListener('change', () => {
+    codSection.classList.remove('hidden');
+    onlineSection.classList.add('hidden');
 });
+
+onlineRadio.addEventListener('change', () => {
+    onlineSection.classList.remove('hidden');
+    codSection.classList.add('hidden');
+});
+
+// Confirm COD Order
+const confirmBtn = document.querySelector('.confirm-btn');
+confirmBtn.addEventListener('click', () => {
+    const address = document.querySelector('#cod-section textarea').value.trim();
+
+    if (!address) {
+        alert("Please enter your delivery address.");
+        return;
+    }
+
+    // Hide Checkout Page
+    document.getElementById('checkoutPage').classList.add('hidden');
+
+    // Show Order Success Page
+    document.getElementById('orderSuccess').classList.remove('hidden');
+});
+
+// Go Back to Home
+function goToHome() {
+    document.getElementById('orderSuccess').classList.add('hidden');
+    document.getElementById('homePage').classList.remove('hidden');
+}
+
+// 🎯 Handle COD Confirm Button
+document.querySelector('.confirm-btn').addEventListener('click', function () {
+    const address = document.querySelector('#cod-section textarea').value.trim();
+
+    if (address === "") {
+        alert("Please enter your delivery address.");
+        return;
+    }
+
+    // Hide checkout page
+    document.getElementById('checkoutPage').classList.add('hidden');
+
+    // Show order success section
+    document.getElementById('orderSuccess').classList.remove('hidden');
+});
+
+// 🔁 Go back to home after success
+function goToHome() {
+    document.getElementById('orderSuccess').classList.add('hidden');
+    document.getElementById('homePage').classList.remove('hidden');
+
+    // Update active sidebar (optional)
+    document.querySelectorAll('.navigation a').forEach(link => link.classList.remove('active'));
+    document.querySelector('[data-page="homePage"]').classList.add('active');
+}
