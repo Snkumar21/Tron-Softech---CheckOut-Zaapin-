@@ -6,60 +6,69 @@
     <title>Zaapin - Checkout</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- 🔶 Top Navbar -->
-    <header class="navbar">
-        <div class="brand">Zaapin</div>
-        <div class="profile">
-            <i class="fas fa-user-circle"></i>
+    <header class="top-navbar">
+        <div class="navbar">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="user-info" id="userDropdown">
+            <i class="fas fa-user"></i> User-Name
+            <i class="fas fa-caret-down dropdown-icon"></i>
+
+            <div class="dropdown-menu hidden" id="dropdownMenu">
+                <a href="profile.html">👤 Profile</a>
+                <a href="login.html">🚪 Logout</a>
+            </div>
         </div>
     </header>
-    
-    <div class="main-layout">
-        <!-- 📁 Sidebar -->
-        <nav class="sidebar">
+
+    <!-- 📁 Sidebar -->
+    <aside class="sidebar">
+        <div class="brand-name">Zaapin</div>
+        
+        <div class="navigation">
+            <a href="Dashboard.html"><i class="fas fa-home"></i> Home</a>
+            <a href="Cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+            <a href="index.html" class="active"><i class="fas fa-credit-card"></i> Checkout</a>
+        </div>
+    </aside>
+
+    <!-- 🧾 Main Content Area -->
+    <main class="container">
+        <h1>Checkout</h1>
+
+        <div class="order-summary">
+            <h2>Your Order</h2>
             <ul>
-                <li><i class="fas fa-home"></i> Home</li>
-                <li><i class="fas fa-shopping-cart"></i> Cart</li>
-                <li class="active"><i class="fas fa-credit-card"></i> Checkout</li>
+                <li><span>🍕 Margherita Pizza</span><span>₹ 250</span></li>
+                <li><span>🥤 Coke 500ml</span><span>₹ 50</span></li>
+                <li><span>🍟 French Fries</span><span>₹ 100</span></li>
             </ul>
-        </nav>
-    
-        <!-- 🧾 Main Checkout Content -->
-        <main class="container">
-            <h1>Checkout</h1>
-
-            <div class="order-summary">
-                <h2>Your Order</h2>
-                <ul>
-                    <li><span>🍕 Margherita Pizza</span><span>₹ 250</span></li>
-                    <li><span>🥤 Coke 500ml</span><span>₹ 50</span></li>
-                    <li><span>🍟 French Fries</span><span>₹ 100</span></li>
-                </ul>
-                <div class="total">
-                    <strong>Total:</strong> <span>₹ 400</span>
-                </div>
+            <div class="total">
+                <strong>Total:</strong> <span>₹ 400</span>
             </div>
+        </div>
 
-            <div class="payment-section">
-                <h2>Select Payment Method</h2>
-                <label><input type="radio" name="payment" value="cod" /> Cash on Delivery</label>
-                <label><input type="radio" name="payment" value="online" /> Online Payment</label>
-            </div>
+        <div class="payment-section">
+            <h2>Select Payment Method</h2>
+            <label><input type="radio" name="payment" value="cod" /> Cash on Delivery</label>
+            <label><input type="radio" name="payment" value="online" /> Online Payment</label>
+        </div>
 
-            <div id="cod-section" class="cod-section hidden">
-                <h3>📦 Confirm COD Address</h3>
-                <textarea placeholder="Enter delivery address..."></textarea>
-                <button class="confirm-btn">Confirm COD Order</button>
-            </div>
+        <div id="cod-section" class="cod-section hidden">
+            <h3>📦 Confirm COD Address</h3>
+            <textarea placeholder="Enter delivery address..."></textarea>
+            <button class="confirm-btn">Confirm COD Order</button>
+        </div>
 
-            <div id="online-section" class="online-section hidden">
-                <h3>💳 Online Payment Coming Soon...</h3>
-                <button class="disabled" disabled>Pay Online</button>
-            </div>
-        </main>
-    </div>
+        <div id="online-section" class="online-section hidden">
+            <h3>💳 Online Payment Coming Soon...</h3>
+            <button class="disabled" disabled>Pay Online</button>
+        </div>
+    </main>
 
     <script src="script.js"></script>
 </body>

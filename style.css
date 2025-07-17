@@ -1,118 +1,182 @@
+/* Reset and base */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
-
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f5f5f5;
+  display: flex;
+  background-color: #f4f4f4;
 }
 
-.navbar {
+/* 🔶 Top Navbar */
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 220px;
+  right: 0;
+  height: 60px;
   background-color: #fc8019;
-  padding: 15px 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 25px;
   color: white;
-  font-size: 20px;
+  z-index: 1000;
 }
 
-.navbar .brand {
+.top-navbar .navbar {
+  font-size: 23px;
   font-weight: bold;
 }
 
-.navbar .profile i {
-  font-size: 24px;
-  cursor: pointer;
-}
-
-/* Sidebar */
-.main-layout {
-  display: flex;
-}
-
-.sidebar {
-  width: 200px;
-  background-color: #222;
-  color: white;
-  height: calc(100vh - 60px);
-  padding-top: 20px;
-}
-
-.sidebar ul {
-  list-style: none;
-}
-
-.sidebar li {
-  padding: 15px 20px;
-  cursor: pointer;
+.top-navbar .user-info {
+  font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
-.sidebar li:hover,
-.sidebar li.active {
-  background-color: #444;
+.user-info {
+  position: relative;
+  cursor: pointer;
 }
 
-/* Main content */
-.container {
-  flex-grow: 1;
-  padding: 30px;
+.dropdown-icon {
+  margin-left: 8px;
+  font-size: 14px;
 }
 
-h1 {
-  color: #fc8019;
-  margin-bottom: 15px;
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: white;
+  color: #333;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 999;
 }
 
-.order-summary ul {
+.dropdown-menu a {
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  transition: background 0.3s;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f4f4f4;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 📁 Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #2c3e50;
+  color: white;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.sidebar .brand-name {
+  background-color: #fc8019;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+.sidebar .navigation {
   list-style: none;
   padding: 0;
 }
 
+.sidebar .navigation  a{
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.sidebar .navigation a:hover {
+  background-color: #34495e;
+}
+
+.sidebar .navigation a i {
+  margin-right: 5px;
+}
+
+/* 🧾 Main Content */
+.main-content {
+  margin-left: 220px;
+  padding: 90px 30px 30px;
+  width: 100%;
+}
+
+.container {
+  margin-left: 220px;
+  padding: 80px 30px 30px;
+  flex-grow: 1;
+}
+
+/* 🧾 Checkout Section */
+.order-summary ul {
+  list-style: none;
+  margin-top: 10px;
+}
 .order-summary li {
   display: flex;
   justify-content: space-between;
   padding: 8px 0;
   border-bottom: 1px dashed #ccc;
 }
-
 .total {
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
-  font-size: 18px;
   font-weight: bold;
+  font-size: 18px;
 }
-
 .payment-section {
   margin-top: 25px;
 }
-
 .payment-section label {
   display: block;
   margin: 10px 0;
   font-weight: 500;
 }
 
+/* 📦 COD and Online Section */
 .cod-section, .online-section {
   margin-top: 20px;
 }
-
 .cod-section textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 6px;
+  border: 1px solid #ccc;
   resize: vertical;
   min-height: 80px;
   margin-bottom: 10px;
 }
-
 .confirm-btn {
   background-color: #28a745;
   color: white;
@@ -122,11 +186,9 @@ h1 {
   border-radius: 6px;
   cursor: pointer;
 }
-
 .confirm-btn:hover {
   background-color: #218838;
 }
-
 .disabled {
   background-color: #ccc;
   color: #666;
@@ -134,7 +196,17 @@ h1 {
   border: none;
   border-radius: 6px;
 }
-
 .hidden {
   display: none;
+}
+
+/* Responsive Option */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  .container {
+    margin-left: 0;
+    padding: 80px 20px 30px;
+  }
 }
