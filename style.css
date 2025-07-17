@@ -137,6 +137,15 @@ body {
   flex-grow: 1;
 }
 
+.hidden {
+  display: none;
+}
+
+.page-section {
+  display: block;
+  padding: 20px;
+}
+
 /* 🧾 Checkout Section */
 .order-summary ul {
   list-style: none;
