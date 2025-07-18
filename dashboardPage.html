@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- Main content -->
+    <div class="main">
+        <header class="topbar">
+            <h1>Explore Our Dishes</h1>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search for food..." onkeyup="searchAndFilter()" />
+            </div>
+        </header>
+
+        <!-- Filter Buttons -->
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterCategory(event, 'all')">All</button>
+            <button class="filter-btn" onclick="filterCategory(event, 'pizza')">Pizza</button>
+            <button class="filter-btn" onclick="filterCategory(event, 'burgers')">Burgers</button>
+            <button class="filter-btn" onclick="filterCategory(event, 'desserts')">Desserts</button>
+        </div>
+
+        <!-- Products -->
+        <section class="product-grid">
+            <div class="product-card" data-category="pizza">
+                <img src="Img/margherita.jpg" alt="Margherita">
+                <h3>Margherita Pizza</h3>
+                <p>₹299</p>
+                <button>Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="pizza">
+                <img src="Img/pepperoni.jpg" alt="Pepperoni">
+                <h3>Pepperoni Pizza</h3>
+                <p>₹349</p>
+                <button>Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="burgers">
+                <img src="Img/cheese.jpg" alt="Cheese Burger">
+                <h3>Cheese Burger</h3>
+                <p>₹199</p>
+                <button>Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="desserts">
+                <img src="Img/chocalate.jpg" alt="Chocolate Cake">
+                <h3>Chocolate Cake</h3>
+                <p>₹149</p>
+                <button>Add to Cart</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let activeCategory = 'all';
+
+        function searchAndFilter() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.product-card');
+
+            cards.forEach(card => {
+                const name = card.querySelector('h3').textContent.toLowerCase();
+                const category = card.dataset.category;
+                const matchesCategory = (activeCategory === 'all' || category === activeCategory);
+                const matchesSearch = name.includes(query);
+                card.style.display = (matchesCategory && matchesSearch) ? 'block' : 'none';
+            });
+        }
+
+        function filterCategory(event, category) {
+            activeCategory = category;
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            searchAndFilter();
+        }
+    </script>
+</body>
+</html>

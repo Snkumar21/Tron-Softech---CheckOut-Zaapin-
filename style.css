@@ -246,7 +246,6 @@ button.confirm-btn:hover,
   background-color: #e65c00;
 }
 
-
 /* Responsive Option */
 @media (max-width: 768px) {
   .sidebar {
@@ -256,4 +255,111 @@ button.confirm-btn:hover,
     margin-left: 0;
     padding: 80px 20px 30px;
   }
+}
+
+/* Dashboard Page CSS */
+
+.filters {
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-btn {
+  padding: 10px 16px;
+  border: 1px solid #ff6b00;
+  background: white;
+  color: #ff6b00;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: #ff6b00;
+  color: white;
+}
+
+.topbar {
+  background: white;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.topbar h1 {
+  font-size: 1.5rem;
+}
+
+.category-section {
+  margin-bottom: 40px;
+}
+
+.category-section h2 {
+  margin-bottom: 20px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.product-card h3 {
+  margin: 15px 0 5px;
+}
+
+.product-card p {
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.product-card button {
+  margin-bottom: 15px;
+  background: #ff6b00;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.product-card button:hover {
+  background: #e95c00;
+}
+
+.search-bar {
+  margin: 20px 0;
+}
+
+.search-bar input {
+  padding: 10px ;
+  width: 250px;
+  max-width: 400px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 1rem;
 }

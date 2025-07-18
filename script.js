@@ -1,76 +1,76 @@
-document.addEventListener('DOMContentLoaded', function () {
+// --- Index Page Script ---
+// 🔽 User dropdown toggle
+const userDropdown = document.getElementById('userDropdown');
+const dropdownMenu = document.getElementById('dropdownMenu');
 
-    // 🔽 User dropdown toggle
-    const userDropdown = document.getElementById('userDropdown');
-    const dropdownMenu = document.getElementById('dropdownMenu');
-
-    userDropdown.addEventListener('click', (e) => {
-        e.stopPropagation();
-        dropdownMenu.classList.toggle('hidden');
-    });
-
-    window.addEventListener('click', () => {
-        dropdownMenu.classList.add('hidden');
-    });
-
-    // 📄 Handle page switching
-    const navLinks = document.querySelectorAll('.navigation a');
-    const pages = document.querySelectorAll('.page-section');
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('data-page');
-
-            pages.forEach(page => page.classList.add('hidden'));
-            document.getElementById(targetId).classList.remove('hidden');
-
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-        });
-    });
-
-    // 💳 Payment Method Toggle
-    const paymentInputs = document.querySelectorAll('input[name="payment"]');
-    const codSection = document.getElementById('cod-section');
-    const onlineSection = document.getElementById('online-section');
-
-    paymentInputs.forEach(input => {
-        input.addEventListener('change', () => {
-            if (input.value === 'cod') {
-                codSection.classList.remove('hidden');
-                onlineSection.classList.add('hidden');
-            } else {
-                onlineSection.classList.remove('hidden');
-                codSection.classList.add('hidden');
-            }
-        });
-    });
-
-    // ✅ Confirm COD Order
-    const confirmBtn = document.querySelector('.confirm-btn');
-    confirmBtn.addEventListener('click', () => {
-        const address = document.querySelector('#cod-section textarea').value.trim();
-        if (!address) {
-            alert("Please enter your delivery address.");
-            return;
-        }
-
-        document.getElementById('checkoutPage').classList.add('hidden');
-        document.getElementById('orderSuccess').classList.remove('hidden');
-    });
-
-    // 🔁 Go back to home
-    function goToHome() {
-        document.getElementById('orderSuccess').classList.add('hidden');
-        document.getElementById('homePage').classList.remove('hidden');
-
-        document.querySelectorAll('[data-page]').forEach(link => {
-            link.addEventListener('click', function () {
-                document.querySelectorAll('.page-section').forEach(p => p.classList.add('hidden'));
-                document.getElementById(this.dataset.page).classList.remove('hidden');
-            });
-        });
-    }
-
+userDropdown.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdownMenu.classList.toggle('hidden');
 });
+
+window.addEventListener('click', () => {
+    dropdownMenu.classList.add('hidden');
+});
+
+// Main Page Content Fetcher...
+const content = document.getElementById('content');
+const navLinks = document.querySelectorAll('.navigation a');
+
+// Load default page (dashboard) on first load
+window.addEventListener('DOMContentLoaded', () => {
+    loadPage('dashboardPage.html');
+});
+
+// Function to load pages
+function loadPage(url) {
+    fetch(url)
+        .then(res => res.text())
+        .then(data => {
+            content.innerHTML = data;
+        })
+        .catch(err => {
+            content.innerHTML = `<p>Error loading page: ${err}</p>`;
+        });
+}
+
+// Handle sidebar navigation
+navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+
+        const pageUrl = link.getAttribute('data-page');
+        loadPage(pageUrl);
+
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+    });
+});
+
+// --- Dashboard Page Script ---
+
+let activeCategory = 'all'; // keep track of selected category
+
+function searchAndFilter() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.product-card');
+
+    cards.forEach(card => {
+        const name = card.querySelector('h3').textContent.toLowerCase();
+        const category = card.dataset.category;
+
+        const matchesCategory = (activeCategory === 'all' || category === activeCategory);
+        const matchesSearch = name.includes(query);
+
+        card.style.display = (matchesCategory && matchesSearch) ? 'block' : 'none';
+    });
+}
+
+function filterCategory(event, category) {
+    activeCategory = category;
+
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    searchAndFilter(); // apply current filter + search
+}
