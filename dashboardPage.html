@@ -8,23 +8,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet" />
 </head>
 <body>
-
     <!-- Main content -->
     <div class="main">
+        <!-- Search & Filters -->
         <header class="topbar">
-            <h1>Explore Our Dishes</h1>
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search for food..." onkeyup="searchAndFilter()" />
+            <div class="topbar-row">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search for food..." onkeyup="searchAndFilter()" />
+                </div>
+                <div class="filters">
+                    <button class="filter-btn active" onclick="filterCategory(event, 'all')">All</button>
+                    <button class="filter-btn" onclick="filterCategory(event, 'pizza')">Pizza</button>
+                    <button class="filter-btn" onclick="filterCategory(event, 'burgers')">Burgers</button>
+                    <button class="filter-btn" onclick="filterCategory(event, 'desserts')">Desserts</button>
+                </div>
             </div>
         </header>
 
-        <!-- Filter Buttons -->
-        <div class="filters">
-            <button class="filter-btn active" onclick="filterCategory(event, 'all')">All</button>
-            <button class="filter-btn" onclick="filterCategory(event, 'pizza')">Pizza</button>
-            <button class="filter-btn" onclick="filterCategory(event, 'burgers')">Burgers</button>
-            <button class="filter-btn" onclick="filterCategory(event, 'desserts')">Desserts</button>
-        </div>
 
         <!-- Products -->
         <section class="product-grid">

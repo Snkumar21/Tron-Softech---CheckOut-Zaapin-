@@ -258,9 +258,44 @@ button.confirm-btn:hover,
 }
 
 /* Dashboard Page CSS */
+.topbar {
+  background: transparent;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+  z-index: 1000;
+  top: 0;
+  position: sticky;
+}
+
+.topbar h1 {
+  font-size: 1.5rem;
+}
+
+.topbar-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.search-bar {
+  margin: 0;
+}
+
+.search-bar input {
+  padding: 10px ;
+  width: 400px;
+  max-width: 400px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 1rem;
+}
 
 .filters {
-  margin-bottom: 30px;
+  margin: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -281,17 +316,6 @@ button.confirm-btn:hover,
 .filter-btn:hover {
   background: #ff6b00;
   color: white;
-}
-
-.topbar {
-  background: white;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin-bottom: 20px;
-}
-
-.topbar h1 {
-  font-size: 1.5rem;
 }
 
 .category-section {
@@ -348,18 +372,4 @@ button.confirm-btn:hover,
 
 .product-card button:hover {
   background: #e95c00;
-}
-
-.search-bar {
-  margin: 20px 0;
-}
-
-.search-bar input {
-  padding: 10px ;
-  width: 250px;
-  max-width: 400px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  outline: none;
-  font-size: 1rem;
 }
