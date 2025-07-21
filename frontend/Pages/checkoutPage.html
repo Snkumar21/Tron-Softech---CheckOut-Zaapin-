@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckoutPage</title>
+</head>
+<body>
+    <div id="checkoutPage" class="page-section hidden">
+        <h1>Checkout</h1>
+
+        <div class="order-summary">
+            <h2>Your Order</h2>
+            <ul>
+                <li><span>🍕 Margherita Pizza</span><span>₹ 250</span></li>
+                <li><span>🥤 Coke 500ml</span><span>₹ 50</span></li>
+                <li><span>🍟 French Fries</span><span>₹ 100</span></li>
+            </ul>
+            <div class="total">
+                <strong>Total:</strong> <span>₹ 400</span>
+            </div>
+        </div>
+
+        <div class="payment-section">
+            <h2>Select Payment Method</h2>
+            <label><input type="radio" name="payment" value="cod" /> Cash on Delivery</label>
+            <label><input type="radio" name="payment" value="online" /> Online Payment</label>
+        </div>
+
+        <div id="cod-section" class="cod-section hidden">
+            <h3>📦 Confirm COD Address</h3>
+            <textarea placeholder="Enter delivery address..."></textarea>
+            <button class="confirm-btn">Confirm COD Order</button>
+        </div>
+
+        <div id="online-section" class="online-section hidden">
+            <h3>💳 Online Payment Coming Soon...</h3>
+            <button class="disabled" disabled>Pay Online</button>
+        </div>
+    </div>
+
+    <!-- ✅ Order Confirmation Message -->
+    <div id="orderSuccess" class="page-section hidden">
+        <h2>✅ Order Placed Successfully!</h2>
+        <p>Thank you for ordering with Zaapin.</p>
+        <div class="order-details">
+            <p><strong>Order ID:</strong> ZP#123456</p>
+            <p><strong>Delivery Mode:</strong> Cash on Delivery</p>
+            <p><strong>Amount:</strong> ₹400</p>
+        </div>
+        <button onclick="goToHome()">Go to Home</button>
+    </div>
+
+    <script src="../script.js"></script>
+</body>
+</html>
