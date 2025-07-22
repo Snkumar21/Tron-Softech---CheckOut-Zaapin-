@@ -29,7 +29,7 @@ db.connect(err => {
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "frontend")));
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 // 🟢 User Login
 app.post("/api/login", (req, res) => {
@@ -85,9 +85,9 @@ app.post("/api/logout", (req, res) => {
     res.json({ success: true, message: "Logged out successfully" });
 });
 
-// Serve index.html
+// Serve login.html
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "index.html"));
+    res.sendFile(path.join(__dirname, "frontend", "../frontend/Pages/login.html"));
 });
 
 // Start server
