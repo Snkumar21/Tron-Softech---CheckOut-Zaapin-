@@ -4,6 +4,7 @@ const mysql = require('mysql2');
 const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
+const multer = require("multer");
 const app = express();
 const PORT = process.env.PORT || 3003;
 
@@ -29,6 +30,30 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "../frontend")));
+
+// 🖼️ File storage config
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, "frontend/uploads/"),
+    filename: (req, file, cb) =>
+        cb(null, Date.now() + "-" + file.originalname),
+});
+const upload = multer({ storage });
+
+// 🟢 Register Route
+app.post("/api/register", upload.single("profile_pic"), (req, res) => {
+    const { name, email, password, phone, address } = req.body;
+    const profilePic = req.file ? req.file.filename : "";
+
+    const query = "INSERT INTO users (name, email, password, phone, address, profile_pic) VALUES (?, ?, ?, ?, ?, ?)";
+    db.query(query, [name, email, password, phone, address, profilePic], (err, result) => {
+        if (err) {
+        console.error("Registration Error:", err);
+        return res.status(500).json({ success: false, message: "Server error" });
+        }
+        res.json({ success: true, message: "Registered successfully" });
+    });
+});
+
 
 // 🟢 User Login
 app.post("/api/login", (req, res) => {
@@ -86,10 +111,11 @@ app.post("/api/logout", (req, res) => {
 
 // Serve login.html as root
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/Pages/login.html"));
+    res.sendFile(path.join(__dirname, "frontend", "index.html")); // login
 });
-app.get("/home", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/index.html"));
+
+app.get("/main.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "main.html")); // dashboard
 });
 
 // Start server

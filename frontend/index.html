@@ -1,48 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Zaapin - Checkout</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Zaapin</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
-    <!-- 🔶 Top Navbar -->
-    <header class="top-navbar">
-        <div class="navbar">
-            <i class="fa-solid fa-bars"></i>
-        </div>
-        <div class="user-info" id="userDropdown">
-            <i class="fas fa-user"></i> User-Name
-            <i class="fas fa-caret-down dropdown-icon"></i>
+  <div class="login-container">
+    <div class="login-card">
+      <h1>Zaapin</h1>
+      <div class="login-box">
+        <h2><i class="fas fa-user-circle"></i> SIGN IN</h2>
 
-            <div class="dropdown-menu hidden" id="dropdownMenu">
-                <a href="./Pages/profilepage.html">👤 Profile</a>
-                <a href="./Pages/login.html">🚪 Logout</a>
-            </div>
-        </div>
-    </header>
+        <form id="loginForm">
+          <input type="text" placeholder="Username" name="email" required />
+          <input type="password" placeholder="Password" name="password" required />
+          <button type="submit"><i class="fas fa-sign-in-alt"></i> SIGN IN</button>
+        </form>
 
-    <!-- 📁 Sidebar -->
-    <aside class="sidebar">
-        <div class="brand-name">Zaapin</div>
-        
-        <div class="navigation">
-            <a href="#" data-page="./Pages/dashboardPage.html"><i class="fas fa-home"></i> Home</a>
-            <a href="#" data-page="./Pages/cartPage.html"><i class="fas fa-shopping-cart"></i> Cart</a>
-            <a href="#" data-page="./Pages/checkoutPage.html"><i class="fas fa-credit-card"></i> Checkout</a>
-        </div>
-    </aside>
+        <p class="register-text">
+          Don't have an account? <a href="register.html">Register here</a>
+        </p>
+      </div>
+    </div>
+  </div>
 
-    <!-- 🧾 Main Content Area -->
-    <main class="container">
-        <div id="content">
-            <!-- Loaded content from other pages will appear here -->
-        </div>
-    </main>
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-    <script src="script.js"></script>
+      const formData = new FormData(this);
+      const email = formData.get("email");
+      const password = formData.get("password");
+
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Save user info in localStorage (optional)
+        localStorage.setItem("user", JSON.stringify(result.user));
+        window.location.href = "index.html";
+      } else {
+        alert(result.message || "Login failed");
+      }
+    });
+  </script>
 </body>
 </html>
