@@ -4,7 +4,6 @@ const mysql = require('mysql2');
 const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
-
 const app = express();
 const PORT = process.env.PORT || 3003;
 
@@ -85,9 +84,12 @@ app.post("/api/logout", (req, res) => {
     res.json({ success: true, message: "Logged out successfully" });
 });
 
-// Serve login.html
+// Serve login.html as root
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "../frontend/Pages/login.html"));
+    res.sendFile(path.join(__dirname, "../frontend/Pages/login.html"));
+});
+app.get("/home", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
 // Start server

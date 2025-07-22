@@ -18,7 +18,10 @@ const navLinks = document.querySelectorAll('.navigation a');
 
 // Load default page (dashboard) on first load
 window.addEventListener('DOMContentLoaded', () => {
-    loadPage('./Pages/dashboardPage.html');
+    // Only load dashboard if we're on index.html
+    if (window.location.pathname.endsWith('index.html')) {
+        loadPage('../Pages/dashboardPage.html');
+    }
 });
 
 // Function to load pages
