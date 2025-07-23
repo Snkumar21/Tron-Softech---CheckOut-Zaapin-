@@ -46,7 +46,7 @@
       if (result.success) {
         // Save user info in localStorage (optional)
         localStorage.setItem("user", JSON.stringify(result.user));
-        window.location.href = "index.html";
+        window.location.href = "main.html";
       } else {
         alert(result.message || "Login failed");
       }
