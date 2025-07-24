@@ -170,7 +170,7 @@ body {
 }
 
 .container {
-  margin-left: 60px; /* collapsed width */
+  margin-left: 60px;
   transition: margin-left 0.3s ease;
   padding: 80px 30px 30px;
   width: calc(100% - 60px);
@@ -289,17 +289,6 @@ button.confirm-btn:hover,
   background-color: #e65c00;
 }
 
-/* Responsive Option */
-@media (max-width: 768px) {
-  .sidebar {
-    display: none;
-  }
-  .container {
-    margin-left: 0;
-    padding: 80px 20px 30px;
-  }
-}
-
 /* Dashboard Page CSS */
 .topbar {
   background: white;
@@ -371,7 +360,7 @@ button.confirm-btn:hover,
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 20px;
 }
 
@@ -390,7 +379,7 @@ button.confirm-btn:hover,
 
 .product-card img {
   width: 100%;
-  height: 200px;
+  height: 125px;
   object-fit: cover;
 }
 
@@ -415,4 +404,15 @@ button.confirm-btn:hover,
 
 .product-card button:hover {
   background: #e95c00;
+}
+
+/* Responsive Option */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  .container {
+    margin-left: 0;
+    padding: 80px 20px 30px;
+  }
 }
