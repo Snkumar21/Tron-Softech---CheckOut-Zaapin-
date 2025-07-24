@@ -7,15 +7,19 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
   display: flex;
+  flex-direction: column;
   background-color: #f4f4f4;
+  height: 100vh;
 }
 
 /* 🔶 Top Navbar */
 .top-navbar {
   position: fixed;
   top: 0;
-  left: 220px;
+  left: 0;
   right: 0;
   height: 60px;
   background-color: #fc8019;
@@ -28,8 +32,21 @@ body {
 }
 
 .top-navbar .navbar {
-  font-size: 23px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 20px;
   font-weight: bold;
+}
+
+.fa-bars {
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+
+.brand-title {
+  font-size: 2rem;
+  margin-left: 10px;
 }
 
 .top-navbar .user-info {
@@ -82,22 +99,33 @@ body {
 
 /* 📁 Sidebar */
 .sidebar {
-  width: 220px;
-  background-color: #2c3e50;
-  color: white;
+  width: 60px;
+  background-color: #222;
+  color: #fff;
   height: 100vh;
   position: fixed;
-  top: 0;
   left: 0;
-  z-index: 999;
+  top: 60px;
+  transition: width 0.3s ease-in-out;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.sidebar.active {
+  width: 220px;
 }
 
 .sidebar .brand-name {
-  background-color: #fc8019;
-  font-size: 30px;
+  display: none;
+  font-size: 22px;
   font-weight: bold;
-  padding: 10px;
+  padding: 15px;
   text-align: center;
+  background-color: #fc8019;
+}
+
+.sidebar.active .brand-name {
+  display: block;
 }
 
 .sidebar .navigation {
@@ -105,37 +133,52 @@ body {
   padding: 0;
 }
 
-.sidebar .navigation  a{
-  padding: 15px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+.sidebar .navigation a {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
   transition: background 0.2s;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
   text-decoration: none;
   color: #fff;
 }
 
-.sidebar .navigation a:hover {
-  background-color: #34495e;
+.sidebar.active .navigation a {
+  justify-content: flex-start;
+  gap: 10px;
+  padding-left: 20px;
 }
 
 .sidebar .navigation a i {
-  margin-right: 5px;
+  font-size: 18px;
+}
+
+.sidebar .navigation a span {
+  display: none;
+}
+
+.sidebar.active .navigation a span {
+  display: inline;
 }
 
 /* 🧾 Main Content */
 .main-content {
-  margin-left: 220px;
-  padding: 90px 30px 30px;
+  position: relative;
   width: 100%;
 }
 
 .container {
-  margin-left: 220px;
+  margin-left: 60px; /* collapsed width */
+  transition: margin-left 0.3s ease;
   padding: 80px 30px 30px;
-  flex-grow: 1;
+  width: calc(100% - 60px);
+}
+
+.sidebar.active ~ .container {
+  margin-left: 220px;
+  width: calc(100% - 220px);
 }
 
 .page-section {
@@ -259,13 +302,13 @@ button.confirm-btn:hover,
 
 /* Dashboard Page CSS */
 .topbar {
-  background: transparent;
+  background: white;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin-bottom: 20px;
   position: sticky;
   z-index: 999;
-  top: 0;
+  top: 60px;
 }
 
 .topbar h1 {

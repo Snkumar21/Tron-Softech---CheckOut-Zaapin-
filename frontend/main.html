@@ -12,12 +12,14 @@
     <!-- 🔶 Top Navbar -->
     <header class="top-navbar">
         <div class="navbar">
-            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-bars" id="toggleSidebar"></i>
+            <span class="brand-title">Zaapin</span>
         </div>
         <div class="user-info" id="userDropdown">
-            <i class="fas fa-user"></i> User-Name
+            <i class="fas fa-user"></i>
+            <span id="userNameDisplay">User-Name</span>
             <i class="fas fa-caret-down dropdown-icon"></i>
-
+            
             <div class="dropdown-menu hidden" id="dropdownMenu">
                 <a href="./Pages/profilepage.html">👤 Profile</a>
                 <a href="index.html">🚪 Logout</a>
@@ -26,23 +28,28 @@
     </header>
 
     <!-- 📁 Sidebar -->
-    <aside class="sidebar">
-        <div class="brand-name">Zaapin</div>
-        
+    <aside class="sidebar" id="sidebar">
         <div class="navigation">
-            <a href="#" data-page="./Pages/dashboardPage.html"><i class="fas fa-home"></i> Home</a>
-            <a href="#" data-page="./Pages/cartPage.html"><i class="fas fa-shopping-cart"></i> Cart</a>
-            <a href="#" data-page="./Pages/checkoutPage.html"><i class="fas fa-credit-card"></i> Checkout</a>
+            <a href="#" data-page="./Pages/dashboardPage.html">
+                <i class="fas fa-home"></i> <span>Home</span>
+            </a>
+            <a href="#" data-page="./Pages/cartPage.html">
+                <i class="fas fa-shopping-cart"></i> <span>Cart</span>
+            </a>
+            <a href="#" data-page="./Pages/checkoutPage.html">
+                <i class="fas fa-credit-card"></i> <span>Checkout</span>
+            </a>
         </div>
     </aside>
 
     <!-- 🧾 Main Content Area -->
-    <main class="container">
+    <main class="container" id="mainContent">
         <div id="content">
             <!-- Loaded content from other pages will appear here -->
         </div>
     </main>
 
-    <script src="script.js"></script>
+    <script src="./script/script.js"></script>
+    <script src="./script/clickSpark.js"></script>
 </body>
 </html>

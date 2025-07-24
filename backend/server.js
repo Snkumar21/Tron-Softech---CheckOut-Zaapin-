@@ -54,7 +54,6 @@ app.post("/api/register", upload.single("profile_pic"), (req, res) => {
     });
 });
 
-
 // 🟢 User Login
 app.post("/api/login", (req, res) => {
     const { email, password } = req.body;
@@ -101,6 +100,31 @@ app.get("/api/profile/:id", (req, res) => {
         }
 
         res.json({ success: true, profile: results[0] });
+    });
+});
+
+// 🟠 Update User Profile
+app.post("/api/profile/update/:id", upload.single("profile_pic"), (req, res) => {
+    const userId = req.params.id;
+    const { name, phone, address } = req.body;
+    const profilePic = req.file ? req.file.filename : null;
+
+    // Dynamically set query based on presence of new profile image
+    const query = profilePic
+        ? "UPDATE users SET name = ?, phone = ?, address = ?, profile_pic = ? WHERE id = ?"
+        : "UPDATE users SET name = ?, phone = ?, address = ? WHERE id = ?";
+
+    const values = profilePic
+        ? [name, phone, address, profilePic, userId]
+        : [name, phone, address, userId];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            console.error("Profile Update Error:", err);
+            return res.status(500).json({ success: false, message: "Server error" });
+        }
+
+        res.json({ success: true, message: "Profile updated successfully!" });
     });
 });
 
