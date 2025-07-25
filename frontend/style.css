@@ -29,6 +29,7 @@ body {
   padding: 0 25px;
   color: white;
   z-index: 1000;
+  transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
 }
 
 .top-navbar .navbar {
@@ -46,7 +47,6 @@ body {
 
 .brand-title {
   font-size: 2rem;
-  margin-left: 10px;
 }
 
 .top-navbar .user-info {
@@ -131,36 +131,65 @@ body {
 .sidebar .navigation {
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.sidebar .navigation a {
+.sidebar .navigation #toggleSidebar {
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.4rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sidebar .nav-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .nav-options a {
   padding: 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
-  transition: background 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   color: #fff;
+  transition: background 0.2s;
 }
 
-.sidebar.active .navigation a {
+.sidebar .nav-options a i {
+  font-size: 18px;
+}
+
+.sidebar .nav-options a span {
+  display: none;
+}
+
+.sidebar.active .nav-options a {
   justify-content: flex-start;
   gap: 10px;
   padding-left: 20px;
 }
 
-.sidebar .navigation a i {
-  font-size: 18px;
-}
-
-.sidebar .navigation a span {
-  display: none;
-}
-
-.sidebar.active .navigation a span {
+.sidebar.active .nav-options a span {
   display: inline;
+}
+
+.sidebar .nav-options a:hover {
+  background-color: #34495e;
+}
+
+.sidebar.active ~ .top-navbar {
+  margin-left: 220px;
+  width: calc(100% - 220px);
+  transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
 }
 
 /* 🧾 Main Content */
