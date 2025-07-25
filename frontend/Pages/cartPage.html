@@ -1,17 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CartPage</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Zappin Product List</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #333;
+            color: #fff;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .controls select, .controls input {
+            padding: 6px 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-warning { background: #f0ad4e; }
+        .btn-success { background: #5cb85c; }
+        .btn-info    { background: #5bc0de; }
+        .btn-danger  { background: #d9534f; }
+
+        img {
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
-    <!-- 🛒 Cart Page -->
-    <div class="page-section">
-        <h1>Your Cart</h1>
-        <p>Your selected items will appear here soon...</p>
+    <div class="controls">
+        <div class="left-controls">
+            <label for="entriesSelect">Show Entries:</label>
+            <select id="entriesSelect">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            </select>
+        </div>
+
+        <input type="text" id="searchInput" placeholder="Search product...">
     </div>
 
-    <script src="../script.js"></script>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Offer</th>
+                <th>Price</th>
+                <th>Recommended</th>
+                <th colspan="4">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="productTable"></tbody>
+    </table>
+
+    <script>
+        const products = [
+            { id: 1, image: 'Pepsi.png', category: 'COLD DRINKS', name: 'PEPSI 750 ml', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 2, image: 'dewcan.png', category: 'COLD DRINKS', name: 'MOUNTAIN DEW CAN', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 3, image: 'Dew.png', category: 'COLD DRINKS', name: 'MOUNTAIN DEW', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 4, image: 'spritecan.png', category: 'COLD DRINKS', name: 'SPRITE CAN', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 5, image: 'sprite.png', category: 'COLD DRINKS', name: 'SPRITE', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 6, image: 'chickenafghanikebab.png', category: 'TANDOOR', name: 'CHICKEN AFGHANI KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 7, image: 'chickentikkakebab.png', category: 'TANDOOR', name: 'CHICKEN TIKKA KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 8, image: 'chickenthantoor.png', category: 'TANDOOR', name: 'CHICKEN THANTOOR', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 9, image: 'chickenbanjarakebab.png', category: 'TANDOOR', name: 'CHICKEN BANJARA KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 10, image: 'chickenangaarakebab.png', category: 'TANDOOR', name: 'CHICKEN ANGAARA KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 11, image: '1litre.png', category: 'COLD DRINKS', name: 'MINERAL WATER 1L', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 12, image: 'chickenangaarakebab.png', category: 'TANDOOR', name: 'CHICKEN ANGAARA KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 13, image: 'water.jpg', category: 'COLD DRINKS', name: 'MINERAL WATER', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 14, image: 'chickenangaarakebab.png', category: 'TANDOOR', name: 'CHICKEN ANGAARA KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 15, image: 'mirinda.png', category: 'COLD DRINKS', name: 'MIRINDA 600ml', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 16, image: 'mirindacan.png', category: 'COLD DRINKS', name: 'MIRINDA CAN', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 17, image: 'mirinda250.png', category: 'COLD DRINKS', name: 'MIRINDA 250 ml', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 18, image: '7up.png', category: 'COLD DRINKS', name: '7 UP 250ml', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 19, image: 'dew250.png', category: 'COLD DRINKS', name: 'MOUNTAIN DEW 250 ML', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 20, image: 'kalimiri.png', category: 'TANDOOR', name: 'CHICKEN KALI MIRI KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 21, image: 'malai.png', category: 'TANDOOR', name: 'CHICKEN MALAI KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 22, image: 'achari.png', category: 'TANDOOR', name: 'CHICKEN ACHARI KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 23, image: 'shikari.png', category: 'TANDOOR', name: 'CHICKEN SHIKARI KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 24, image: 'barbeque.png', category: 'TANDOOR', name: 'CHICKEN BARBEQUE KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 25, image: 'sholi.png', category: 'TANDOOR', name: 'CHICKEN SHOLI KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 26, image: 'pahadi.png', category: 'TANDOOR', name: 'CHICKEN PAHADI KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 27, image: 'paneer.png', category: 'TANDOOR', name: 'PANEER KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 28, image: 'lasuni.png', category: 'TANDOOR', name: 'CHICKEN LASUNI KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 29, image: 'paneer.png', category: 'TANDOOR', name: 'CHICKEN PANEER KEBAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 30, image: 'chandnikabab.png', category: 'TANDOOR', name: 'CHICKEN CHANDNI KABAB', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 31, image: 'paneer65.png', category: 'CHINESE', name: 'PANEER 65', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 32, image: 'vegmanchurian.jpg', category: 'CHINESE', name: 'VEG MANCHURIAN', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 33, image: 'vegcrispy.png', category: 'CHINESE', name: 'VEG CRYSPY', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 34, image: 'paneerchilly.png', category: 'CHINESE', name: 'PANEER CHILLY', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 35, image: 'paneermanchurian.png', category: 'CHINESE', name: 'PANEER MANCHURIAN', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 36, image: 'mushroomchilly.png', category: 'CHINESE', name: 'MUSHROOM CHILLY', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 37, image: 'chickenmanchurian.png', category: 'CHINESE', name: 'CHICKEN MANCHURIAN', offer: 'NO OFFER', price: '100/-', recommended: 'no' },
+            { id: 38, image: 'chickenlollipop.png', category: 'CHINESE', name: 'CHICKEN LOLLYPOP', offer: 'NO OFFER', price: '100/-', recommended: 'no' }
+        ];
+
+        let entriesToShow = 10;
+
+        function loadProducts() {
+            const table = document.getElementById("productTable");
+            table.innerHTML = "";
+
+            const filteredProducts = products.filter(p =>
+                p.name.toLowerCase().includes(document.getElementById("searchInput").value.toLowerCase())
+            );
+
+            const visibleProducts = filteredProducts.slice(0, entriesToShow);
+
+            visibleProducts.forEach((product, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${product.id}</td>
+                    <td><img src="${product.image}" width="50"></td>
+                    <td>${product.category}</td>
+                    <td>${product.name}</td>
+                    <td>${product.offer}</td>
+                    <td>${product.price}</td>
+                    <td>${product.recommended}</td>
+                    <td><button class="btn-warning btn-sm" onclick="viewProduct(${index})">View</button></td>
+                    <td><button class="btn-success btn-sm" onclick="editProduct(${index})">Edit</button></td>
+                    <td><button class="btn-info btn-sm" onclick="addPhoto(${index})">+ Add Photo</button></td>
+                    <td><button class="btn-danger btn-sm" onclick="deleteProduct(${index})">Delete</button></td>
+                `;
+                table.appendChild(row);
+            });
+        }
+
+        function deleteProduct(index) {
+            if (confirm("Are you sure you want to delete this product?")) {
+                products.splice(index, 1);
+                loadProducts();
+            }
+        }
+
+        function addPhoto(index) {
+            const fileInput = document.createElement("input");
+            fileInput.type = "file";
+            fileInput.accept = "image/*";
+            fileInput.addEventListener("change", function () {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    products[index].image = e.target.result;
+                    loadProducts();
+                };
+                reader.readAsDataURL(this.files[0]);
+            });
+            fileInput.click();
+        }
+
+        function viewProduct(index) {
+            alert(`Product: ${products[index].name}`);
+        }
+
+        function editProduct(index) {
+            const newName = prompt("Enter new name:", products[index].name);
+            if (newName) {
+                products[index].name = newName;
+                loadProducts();
+            }
+        }
+
+        document.getElementById("searchInput").addEventListener("input", loadProducts);
+        document.getElementById("entriesSelect").addEventListener("change", function () {
+            entriesToShow = parseInt(this.value);
+            loadProducts();
+        });
+
+        loadProducts();
+    </script>
 </body>
 </html>

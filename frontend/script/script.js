@@ -95,6 +95,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (user && user.name) {
         nameSpan.textContent = user.name;
     } else {
-        nameSpan.textContent = "Guest"; // fallback
+        nameSpan.textContent = "Guest";
     }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const settingsTrigger = document.getElementById("settingsTrigger");
+    const settingsPopup = document.getElementById("settingsPopup");
+
+    settingsTrigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        settingsPopup.classList.toggle("hidden");
+    });
+
+    window.addEventListener("click", (e) => {
+        if (!settingsPopup.contains(e.target) && !settingsTrigger.contains(e.target)) {
+            settingsPopup.classList.add("hidden");
+        }
+    });
 });
