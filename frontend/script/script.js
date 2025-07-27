@@ -1,12 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
     const content = document.getElementById('content');
     const navLinks = document.querySelectorAll('.navigation a');
-
     const toggleBtn = document.getElementById('toggleSidebar');
     const sidebar = document.querySelector('.sidebar');
-
     const userDropdown = document.getElementById('userDropdown');
     const dropdownMenu = document.getElementById('dropdownMenu');
+    const settingsTrigger = document.getElementById("settingsTrigger");
+    const settingsPanel = document.getElementById("settingsPanel");
+    const themeToggleCheckbox = document.getElementById("themeToggle");
+    const nameSpan = document.getElementById("userNameDisplay");
 
     // ✅ Sidebar toggle
     if (toggleBtn && sidebar) {
@@ -15,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
             sidebar.classList.toggle('active');
         });
 
-        // Optional: Hide sidebar on outside click
         window.addEventListener('click', (e) => {
             if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
                 sidebar.classList.remove('active');
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ✅ User dropdown toggle
+    // ✅ User dropdown
     if (userDropdown && dropdownMenu) {
         userDropdown.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -37,12 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ✅ Load default page (Dashboard) on main.html
+    // ✅ Default load dashboard
     if (window.location.pathname.endsWith("main.html") && content) {
         loadPage("./Pages/dashboardPage.html");
     }
 
-    // ✅ Handle sidebar nav links
+    // ✅ Handle sidebar link navigation
     navLinks.forEach(link => {
         link.addEventListener("click", (e) => {
             e.preventDefault();
@@ -50,33 +51,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
             loadPage(pageUrl);
 
-            // Active state
             navLinks.forEach(l => l.classList.remove("active"));
             link.classList.add("active");
         });
     });
 
-    // ✅ Load external page content into #content
     function loadPage(url) {
         fetch(url)
             .then(res => res.text())
             .then(html => {
                 content.innerHTML = html;
 
-                // Load dynamic script if required
-                if (url.includes("dashboardPage")) {
-                    loadScript("./js/dashboard.js");
-                }
-                if (url.includes("profilePage")) {
-                    loadScript("./js/profile.js");
-                }
+                if (url.includes("dashboardPage")) loadScript("./js/dashboard.js");
+                if (url.includes("profilePage")) loadScript("./js/profile.js");
             })
             .catch(err => {
                 content.innerHTML = `<p>Error loading page: ${err}</p>`;
             });
     }
 
-    // ✅ Load external JS
     function loadScript(scriptPath) {
         const existingScript = document.querySelector(`script[src="${scriptPath}"]`);
         if (existingScript) existingScript.remove();
@@ -86,30 +79,52 @@ document.addEventListener("DOMContentLoaded", () => {
         script.defer = true;
         document.body.appendChild(script);
     }
-});
 
-document.addEventListener("DOMContentLoaded", () => {
+    // ✅ Load user name from localStorage
     const user = JSON.parse(localStorage.getItem("user"));
-    const nameSpan = document.getElementById("userNameDisplay");
-
     if (user && user.name) {
         nameSpan.textContent = user.name;
     } else {
         nameSpan.textContent = "Guest";
     }
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-    const settingsTrigger = document.getElementById("settingsTrigger");
-    const settingsPanel = document.getElementById('settingsPanel');
-
-    settingsTrigger.addEventListener('click', (e) => {
+    // ✅ Settings panel toggle like WhatsApp
+    settingsTrigger.addEventListener("click", (e) => {
         e.stopPropagation();
-        settingsPanel.classList.toggle('show');
+        settingsPanel.classList.toggle("show");
     });
 
-    // Hide when clicked outside
-    window.addEventListener('click', () => {
-        settingsPanel.classList.remove('show');
+    document.addEventListener("click", (e) => {
+        if (
+            !settingsPanel.contains(e.target) &&
+            !settingsTrigger.contains(e.target)
+        ) {
+            settingsPanel.classList.remove("show");
+        }
+    });
+
+    // ✅ Theme from localStorage
+    function applyThemeFromStorage() {
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-mode");
+            themeToggleCheckbox.checked = true;
+        } else {
+            document.body.classList.remove("dark-mode");
+            themeToggleCheckbox.checked = false;
+        }
+    }
+
+    applyThemeFromStorage();
+
+    // ✅ Theme toggle change
+    themeToggleCheckbox.addEventListener("change", () => {
+        if (themeToggleCheckbox.checked) {
+            document.body.classList.add("dark-mode");
+            localStorage.setItem("theme", "dark");
+        } else {
+            document.body.classList.remove("dark-mode");
+            localStorage.setItem("theme", "light");
+        }
     });
 });

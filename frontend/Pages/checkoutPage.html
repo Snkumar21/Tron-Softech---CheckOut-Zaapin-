@@ -4,6 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CheckoutPage</title>
+    <style>
+        /* 🧾 Checkout Section */
+.order-summary ul {
+  list-style: none;
+  margin-top: 10px;
+}
+
+.order-summary li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed #ccc;
+}
+
+.total {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.payment-section {
+  margin-top: 25px;
+}
+
+.payment-section label {
+  display: block;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+/* 📦 COD and Online Section */
+.cod-section, .online-section {
+  margin-top: 20px;
+}
+
+.cod-section textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  min-height: 80px;
+  margin-bottom: 10px;
+}
+
+.confirm-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.confirm-btn:hover {
+  background-color: #218838;
+}
+
+.disabled {
+  background-color: #ccc;
+  color: #666;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+}
+
+#orderSuccess {
+  text-align: center;
+  padding: 40px;
+}
+
+.order-details {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.order-details p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+button.confirm-btn,
+#orderSuccess button {
+  background-color: #ff6600;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button.confirm-btn:hover,
+#orderSuccess button:hover {
+  background-color: #e65c00;
+}
+    </style>
 </head>
 <body>
     <div id="checkoutPage" class="page-section hidden">

@@ -1,8 +1,36 @@
+/* 🌞 Default Light Theme */
+:root {
+  --bg-color: #fff;
+  --text-color: #333;
+  --sidebar-bg: #222;
+  --sidebar-active-bg: #34495e;
+  --setting-bg: #fff;
+  --setting-text: #333;
+}
+
+/* 🌙 Dark Theme */
+.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f4f4f4;
+  --sidebar-bg: #1e1e1e;
+  --sidebar-active-bg: #2c2c2c;
+  --setting-bg: #2e2e2e;
+  --setting-text: #eee;
+}
+
 /* Reset and base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body,
+.sidebar,
+.settings-panel,
+.product-card,
+.topbar {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -11,7 +39,8 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  background-color: #f4f4f4;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   height: 100vh;
 }
 
@@ -104,7 +133,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 60px;
-  background-color: #222;
+  background-color: var(--sidebar-bg);
   color: #fff;
   height: 100vh;
   position: fixed;
@@ -197,7 +226,7 @@ body {
 }
 
 .sidebar .nav-options a:hover {
-  background-color: #34495e;
+  background-color: var(--sidebar-active-bg);
 }
 
 /* 🔽 Bottom Nav Options */
@@ -233,7 +262,7 @@ body {
 }
 
 .downside-nav .settings-toggle:hover {
-  background-color: #34495e;
+  background-color: var(--sidebar-active-bg);
 }
 
 /* ⚙️ Settings Popup */
@@ -242,8 +271,8 @@ body {
   bottom: 10px;
   left : 10px;
   width: 250px;
-  background: #fff;
-  color: #333;
+  background-color: var(--setting-bg);
+  color: var(--setting-text);
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   padding: 12px;
@@ -277,6 +306,54 @@ body {
 
 .settings-panel .panel-option:hover {
   background-color: #f4f4f4;
+}
+
+/* Toggle switch button for dark mode */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+  float: right;
+  margin-top: 2px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  transition: 0.4s;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #fc8019;
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
 }
 
 /* 🪪 Branding */
@@ -335,112 +412,9 @@ body {
   padding: 20px;
 }
 
-/* 🧾 Checkout Section */
-.order-summary ul {
-  list-style: none;
-  margin-top: 10px;
-}
-
-.order-summary li {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px dashed #ccc;
-}
-
-.total {
-  margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.payment-section {
-  margin-top: 25px;
-}
-
-.payment-section label {
-  display: block;
-  margin: 10px 0;
-  font-weight: 500;
-}
-
-/* 📦 COD and Online Section */
-.cod-section, .online-section {
-  margin-top: 20px;
-}
-
-.cod-section textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  resize: vertical;
-  min-height: 80px;
-  margin-bottom: 10px;
-}
-
-.confirm-btn {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.confirm-btn:hover {
-  background-color: #218838;
-}
-
-.disabled {
-  background-color: #ccc;
-  color: #666;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-}
-
-#orderSuccess {
-  text-align: center;
-  padding: 40px;
-}
-
-.order-details {
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 400px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.order-details p {
-  margin: 8px 0;
-  font-size: 16px;
-}
-
-button.confirm-btn,
-#orderSuccess button {
-  background-color: #ff6600;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button.confirm-btn:hover,
-#orderSuccess button:hover {
-  background-color: #e65c00;
-}
-
 /* Dashboard Page CSS */
 .topbar {
-  background: white;
+  background-color: var(--bg-color);
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin-bottom: 20px;
@@ -485,7 +459,7 @@ button.confirm-btn:hover,
 .filter-btn {
   padding: 10px 16px;
   border: 1px solid #ff6b00;
-  background: white;
+  background-color: var(--bg-color);
   color: #ff6b00;
   font-weight: 600;
   border-radius: 6px;
@@ -514,7 +488,7 @@ button.confirm-btn:hover,
 }
 
 .product-card {
-  background-color: white;
+  background-color: var(--bg-color);
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   overflow: hidden;
