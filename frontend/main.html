@@ -46,14 +46,8 @@
             <div class="downside-nav">
                 <!-- ⚙️ Settings Trigger -->
                 <div id="settingsTrigger" class="settings-toggle">
-                    <i class="fa-solid fa-gear"></i> <span>Setting</span>
-                </div>
-
-                <!-- ⚙️ Settings Popup -->
-                <div class="settings-popup hidden" id="settingsPopup">
-                    <div class="setting-option">🌗 Theme</div>
-                    <div class="setting-option">🌐 Language</div>
-                    <div class="setting-option">🔔 Notifications</div>
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Setting</span>
                 </div>
 
                 <!-- 🪪 TronSoftech Branding -->
@@ -71,6 +65,14 @@
             <!-- Loaded content from other pages will appear here -->
         </div>
     </main>
+
+    <!-- ⚙️ Settings Panel Container -->
+    <div id="settingsPanel" class="settings-panel hidden">
+        <div class="panel-header">Settings</div>
+        <div class="panel-option">🌗 Theme</div>
+        <div class="panel-option">🌐 Language</div>
+        <div class="panel-option">🔔 Notifications</div>
+    </div>
 
     <script src="./script/script.js"></script>
     <script src="./script/clickSpark.js"></script>

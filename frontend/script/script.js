@@ -101,16 +101,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const settingsTrigger = document.getElementById("settingsTrigger");
-    const settingsPopup = document.getElementById("settingsPopup");
+    const settingsPanel = document.getElementById('settingsPanel');
 
-    settingsTrigger.addEventListener("click", (e) => {
+    settingsTrigger.addEventListener('click', (e) => {
         e.stopPropagation();
-        settingsPopup.classList.toggle("hidden");
+        settingsPanel.classList.toggle('show');
     });
 
-    window.addEventListener("click", (e) => {
-        if (!settingsPopup.contains(e.target) && !settingsTrigger.contains(e.target)) {
-            settingsPopup.classList.add("hidden");
-        }
+    // Hide when clicked outside
+    window.addEventListener('click', () => {
+        settingsPanel.classList.remove('show');
     });
 });
