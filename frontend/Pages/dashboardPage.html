@@ -109,6 +109,7 @@
 
     <script>
         let activeCategory = 'all';
+        let cartItems = [];
 
         function searchAndFilter() {
             const query = document.getElementById('searchInput').value.toLowerCase();
@@ -125,11 +126,36 @@
 
         function filterCategory(event, category) {
             activeCategory = category;
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             searchAndFilter();
         }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cartBadge');
+            if (cartItems.length > 0) {
+                badge.textContent = cartItems.length;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const addButtons = document.querySelectorAll(".product-card button");
+            addButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    const card = button.closest(".product-card");
+                    const name = card.querySelector("h3").textContent;
+                    const price = parseFloat(card.querySelector("p").textContent.replace("₹", ""));
+
+                    cartItems.push({ name, price });
+                    updateCartBadge();
+                });
+            });
+
+            searchAndFilter(); // Initial call to show filtered products on load
+        });
     </script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+// Main Page Scripting and Logics...
+
 document.addEventListener("DOMContentLoaded", () => {
     const content = document.getElementById('content');
     const navLinks = document.querySelectorAll('.navigation a');
@@ -128,3 +130,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+let cartItems = [];
+
+function updateCartBadge() {
+    const badge = document.getElementById('cartBadge');
+    if (badge) {
+        if (cartItems.length > 0) {
+            badge.textContent = cartItems.length;
+            badge.style.display = 'inline-block';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+}
