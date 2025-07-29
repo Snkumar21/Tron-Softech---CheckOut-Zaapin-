@@ -6,16 +6,24 @@
   --sidebar-active-bg: #34495e;
   --setting-bg: #fff;
   --setting-text: #333;
+  --topbar-bg-color: #fff;
+  --card-color: #fff;
+  --hover-color: #ddd;
+  --mini-text-color: #555;
 }
 
 /* 🌙 Dark Theme */
 .dark-mode {
-  --bg-color: #121212;
+  --bg-color: #111;
   --text-color: #f4f4f4;
   --sidebar-bg: #1e1e1e;
   --sidebar-active-bg: #2c2c2c;
   --setting-bg: #2e2e2e;
   --setting-text: #eee;
+  --topbar-bg-color: #222;
+  --card-color: #222;
+  --hover-color: #222;
+  --mini-text-color: #616161;
 }
 
 /* Reset and base */
@@ -305,7 +313,7 @@ body {
 }
 
 .settings-panel .panel-option:hover {
-  background-color: #f4f4f4;
+  background-color: var(--hover-color);
 }
 
 /* Toggle switch button for dark mode */
@@ -314,7 +322,6 @@ body {
   display: inline-block;
   width: 40px;
   height: 22px;
-  float: right;
   margin-top: 2px;
 }
 
@@ -414,7 +421,7 @@ input:checked + .slider:before {
 
 /* Dashboard Page CSS */
 .topbar {
-  background-color: var(--bg-color);
+  background-color: var(--topbar-bg-color);
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin-bottom: 20px;
@@ -437,13 +444,14 @@ input:checked + .slider:before {
 
 .search-bar {
   margin: 0;
+  border: none;
 }
 
 .search-bar input {
   padding: 10px ;
   width: 400px;
   max-width: 400px;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid #ccc;
   outline: none;
   font-size: 1rem;
@@ -488,7 +496,7 @@ input:checked + .slider:before {
 }
 
 .product-card {
-  background-color: var(--bg-color);
+  background-color: var(--card-color);
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   overflow: hidden;
@@ -511,7 +519,7 @@ input:checked + .slider:before {
 }
 
 .product-card p {
-  color: #555;
+  color: var(mini-text-color);
   margin-bottom: 10px;
 }
 
